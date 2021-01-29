@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patatap Clone</title>
+    <link type = "text/css" rel ="stylesheet" href = "css/style.css">
+    <script type = "text/javascript" src="js/paper-full.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.core.min.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+
+        var circles = [];
+
+        function randomColor() {
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            return "rgb(" + r + ", " + g + ", " + b + ")";
+        }
+        var keyPress = {
+            a : {
+                sound : new Howl({
+                src : ["assets/Sounds/1.mp3"]
+                })
+            },
+            b : {
+                sound : new Howl({
+                src : ["assets/Sounds/2.mp3"]
+                })
+            },
+            c : {
+                sound : new Howl({
+                src : ["assets/Sounds/3.mp3"]
+                })
+            },
+            d : {
+                sound : new Howl({
+                src : ["assets/Sounds/4.mp3"]
+                })
+            },
+            e : {
+                sound : new Howl({
+                src : ["assets/Sounds/5.mp3"]
+                })
+            },
+            f : {
+                sound : new Howl({
+                src : ["assets/Sounds/6.mp3"]
+                })
+            },
+            g : {
+                sound : new Howl({
+                src : ["assets/Sounds/7.mp3"]
+                })
+            },
+            h : {
+                sound : new Howl({
+                src : ["assets/Sounds/8.mp3"]
+                })
+            },
+            i : {
+                sound : new Howl({
+                src : ["assets/Sounds/9.mp3"]
+                })
+            },
+            j : {
+                sound : new Howl({
+                src : ["assets/Sounds/10.mp3"]
+                })
+            },
+            k : {
+                sound : new Howl({
+                src : ["assets/Sounds/11.mp3"]
+                })
+            },
+            l : {
+                sound : new Howl({
+                src : ["assets/Sounds/12.mp3"]
+                })
+            },
+            m : {
+                sound : new Howl({
+                src : ["assets/Sounds/13.mp3"]
+                })
+            },
+            n : {
+                sound : new Howl({
+                src : ["assets/Sounds/bubbles.mp3"]
+                })
+            },
+            o : {
+                sound : new Howl({
+                src : ["assets/Sounds/15.mp3"]
+                })
+            },
+            p : {
+                sound : new Howl({
+                src : ["assets/Sounds/16.mp3"]
+                })
+            },
+            q : {
+                sound : new Howl({
+                src : ["assets/Sounds/17.mp3"]
+                })
+            },
+            r : {
+                sound : new Howl({
+                src : ["assets/Sounds/prism-3.mp3"]
+                })
+            },
+            s : {
+                sound : new Howl({
+                src : ["assets/Sounds/9.mp3"]
+                })
+            },
+            t : {
+                sound : new Howl({
+                src : ["assets/Sounds/20.mp3"]
+                })
+            },
+            u : {
+                sound : new Howl({
+                src : ["assets/Sounds/21.mp3"]
+                })
+            },
+            v : {
+                sound : new Howl({
+                src : ["assets/Sounds/22.mp3"]
+                })
+            },
+            w : {
+                sound : new Howl({
+                src : ["assets/Sounds/23.mp3"]
+                })
+            },
+            x : {
+                sound : new Howl({
+                src : ["assets/Sounds/24.mp3"]
+                })
+            },
+            y : {
+                sound : new Howl({
+                src : ["assets/Sounds/1.mp3"]
+                })
+            },
+            z : {
+                sound : new Howl({
+                src : ["assets/Sounds/1.mp3"]
+                })
+            },
+        }
+
+        function onKeyDown(event) {
+            if(keyPress[event.key])
+            {
+            var x = Point.random() * view.size;
+            var y = Point.random() * view.size;
+            
+            var myCircle = new Path.Circle(new Point(x, y), 500);
+            circles.push(myCircle);
+            keyPress[event.key].sound.play();
+            myCircle.fillColor = randomColor();
+            }
+        }
+
+        
+        function onFrame(event) {
+            for (var i = 0; i < circles.length; i++)
+            {
+                circles[i].fillColor.hue += 1;
+                circles[i].scale(0.9);
+                if(circles[i].area < 1)
+                {
+                circles[i].remove();
+                circles.splice(i,1);
+                }
+            }
+
+        }     
+    </script>
+
+</head>
+<body>
+    <canvas id = "myCanvas" resize = "true  "></canvas>
+</body>
+</html>
